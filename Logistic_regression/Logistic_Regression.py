@@ -1,8 +1,8 @@
 import numpy as np
 x = np.array([1,2,3,4,5,6,7,8,9,10],dtype=float)
 y = np.array([0,0,0,0,0,1,1,1,1,1], dtype=float)
-w = 0
-b = 0
+w = 0.0
+b = 0.0
 lr = 0.01
 epoch = 10000
 for i in range(epoch):
