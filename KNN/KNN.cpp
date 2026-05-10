@@ -7,7 +7,7 @@ int main()
 {
     double x[] = {1,2,3,4,5,6,7,8,9,10};
     double y[] = {0,0,0,0,0,1,1,1,1,1};
-    double test = 5.5;
+    double test = 4.5;
     double dist[N];
     for (int i = 0; i < N; i++)
     {
