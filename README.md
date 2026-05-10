@@ -20,9 +20,12 @@ After doing both, sklearn becomes completely transparent.
 | # | Model | C | NumPy | Concepts Covered |
 |---|-------|---|-------|-----------------|
 | 01 | Linear Regression | ✅ | ✅ | MSE, Gradient Descent, Chain Rule |
-| 02 | Logistic Regression | 🔜 | 🔜 | Sigmoid, Binary Cross-Entropy |
-| 03 | K-Nearest Neighbors | 🔜 | 🔜 | Euclidean Distance, No Training |
-| 04 | Neural Network | 🔜 | 🔜 | Backpropagation, ReLU, Hidden Layers |
+| 02 | Logistic Regression | ✅ | ✅ | Sigmoid, Binary Cross-Entropy |
+| 03 | K-Nearest Neighbors | ✅ | ✅ | Distance, No Training, Majority Vote |
+| 04 | Polynomial Regression | 🔜 | 🔜 | Feature Engineering, Overfitting |
+| 05 | Decision Tree | 🔜 | 🔜 | Recursion, Gini Impurity, Splitting |
+| 06 | Random Forest | 🔜 | 🔜 | Ensemble Methods, Bagging |
+| 07 | Neural Network | 🔜 | 🔜 | Backpropagation, ReLU, Hidden Layers |
 
 ---
 
@@ -42,7 +45,19 @@ ml-from-scratch/
 │   ├── knn.c
 │   ├── knn.py
 │   └── KNN.md
-└── 04_neural_network/
+├── 04_polynomial_regression/
+│   ├── polynomial_regression.c
+│   ├── polynomial_regression.py
+│   └── Polynomial_Regression.md
+├── 05_decision_tree/
+│   ├── decision_tree.c
+│   ├── decision_tree.py
+│   └── Decision_Tree.md
+├── 06_random_forest/
+│   ├── random_forest.c
+│   ├── random_forest.py
+│   └── Random_Forest.md
+└── 07_neural_network/
     ├── nn_xor.c
     ├── nn_xor.py
     └── Neural_Network.md
@@ -53,15 +68,19 @@ ml-from-scratch/
 ## How to Run
 
 ### C
+
 ```bash
 gcc linear_regression.c -o lr && ./lr
 ```
-> No `-lm` needed for Linear Regression. Add it for models using `exp()` or `sqrt()`.
+
+> Add `-lm` for models using `exp()`, `log()`, or `sqrt()` — Logistic Regression, Neural Network.
 
 ### Python
+
 ```bash
 python linear_regression.py
 ```
+
 > Only dependency is NumPy. Install with `pip install numpy`.
 
 ---
@@ -73,6 +92,7 @@ python linear_regression.py
 - Why gradients have a `-2/N` factor
 - What vectorized operations are actually doing under the hood
 - How memory layout affects computation
+- Why pointer arithmetic and index arrays matter
 
 **Building in NumPy shows you:**
 - How loops collapse into array operations
@@ -93,4 +113,4 @@ python linear_regression.py
 
 **Avik Sarkar**
 B.Tech CSE (AI/ML) — Brainware University
-[GitHub](https://github.com/aviksarkar0204-stack)  ·  [Hugging Face](https://huggingface.co/Avik128)
+[GitHub](https://github.com/aviksarkar0204-stack) · [Hugging Face](https://huggingface.co/Avik128)
