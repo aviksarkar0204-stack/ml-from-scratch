@@ -6,5 +6,6 @@ set(CMAKE_C_STANDARD 11)
 add_executable(ML_from_Scratch
         "Linear_regression/Linear_ regression.c"
         Logistic_regression/Logistic_regression.c
-        KNN/KNN.cpp)
+        KNN/KNN.cpp
+        Polynomial_regression/Polynomial_regression.c)
 
