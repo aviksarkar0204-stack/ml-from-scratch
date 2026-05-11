@@ -12,3 +12,4 @@ add_executable(ML_from_Scratch
         math_utils.c
         main.c)
 
+
