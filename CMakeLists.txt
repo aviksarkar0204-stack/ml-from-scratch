@@ -7,5 +7,8 @@ add_executable(ML_from_Scratch
         "Linear_regression/Linear_ regression.c"
         Logistic_regression/Logistic_regression.c
         KNN/KNN.cpp
-        Polynomial_regression/Polynomial_regression.c)
+        Polynomial_regression/Polynomial_regression.c
+        math_utils.h
+        math_utils.c
+        main.c)
 
