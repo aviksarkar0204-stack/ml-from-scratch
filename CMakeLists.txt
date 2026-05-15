@@ -13,6 +13,7 @@ add_executable(ML_from_Scratch
         main.c
         "Ridge Regression (L2 regularization)/Ridge_regression.c"
         "Lasso Regression (L1 regularization)/Lasso_regression.c"
-        ElasticNet/ElasticNet.c)
+        ElasticNet/ElasticNet.c
+        Gaussian_Naive_Bayes/Gaussian_Naive_Bayes.c)
 
 
