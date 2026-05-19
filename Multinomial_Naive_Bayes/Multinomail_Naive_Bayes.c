@@ -6,12 +6,13 @@
 
 int main()
 {
+#define F 3
     double X[N][F] = {
-        {3, 2},  {4, 1},  {5, 3},  {2, 2},  {6, 4},
-        {0, 0},  {1, 0},  {0, 1},  {0, 0},  {1, 1}
+        {3, 2, 0},  {4, 1, 0},  {5, 3, 0},  {2, 2, 0},  {6, 4, 0},  // spam
+        {0, 0, 3},  {0, 0, 2},  {0, 0, 4},  {0, 0, 2},  {0, 0, 3}   // not spam
     };
     int y[N] = {1, 1, 1, 1, 1, 0, 0, 0, 0, 0};
-    double test[F] = {5, 4};
+    double test[F] = {0, 0, 3};
     double feat_count[C][F];
     double total[C];
     double prior[C];
@@ -49,8 +50,8 @@ int main()
     int prediction = scores[0] > scores[1] ? 0 : 1;
 
 
-    printf("feat_count[0]: %f %f\n", feat_count[0][0], feat_count[0][1]);
-    printf("feat_count[1]: %f %f\n", feat_count[1][0], feat_count[1][1]);
+    printf("feat_count[0]: %f %f %f\n", feat_count[0][0], feat_count[0][1], feat_count[0][2]);
+    printf("feat_count[1]: %f %f %f\n", feat_count[1][0], feat_count[1][1], feat_count[1][2]);
     printf("total[0]: %f  total[1]: %f\n", total[0], total[1]);
     printf("prior[0]: %f  prior[1]: %f\n", prior[0], prior[1]);
     printf("\nScore class 0 (not spam): %f\n", scores[0]);
