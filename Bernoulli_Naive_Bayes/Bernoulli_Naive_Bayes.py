@@ -12,7 +12,6 @@ x = np.array([[1, 0],
 y = np.array([1,1,1,1,1,0,0,0,0,0])
 classes = np.unique(y)
 test = np.array([1,0],dtype=float)
-
 feat_count = np.zeros((len(classes), x.shape[1]))
 total      = np.zeros(len(classes))
 prior      = np.zeros(len(classes))
@@ -20,15 +19,14 @@ prior      = np.zeros(len(classes))
 for c in classes:
     x_c = x[y == c]
     feat_count[c] = np.sum(x_c, axis=0)
-    total[c] = np.sum(x_c)
+    total[c] = len(x_c)
     prior[c] = len(x_c) / len(x)
 
 scores = []
 for c in classes:
-    c = int(c)
     log_prior = np.log(prior[c])
-    prob = (feat_count[c] + 1) / (total[c] + x.shape[1])
-    log_likelihood = np.sum(test * np.log(prob))
+    prob = (feat_count[c] + 1) / (total[c] + 2)
+    log_likelihood = np.sum(test * np.log(prob) + (1 - test) * np.log(1 - prob))
     scores.append(log_prior + log_likelihood)
 
 prediction = int(classes[np.argmax(scores)])
