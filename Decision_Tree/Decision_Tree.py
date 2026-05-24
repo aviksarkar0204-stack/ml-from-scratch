@@ -63,3 +63,25 @@ def build_tree(X, y, depth=0, max_depth=3):
     node.right = build_tree(X[right_mask], y[right_mask], depth+1, max_depth)
 
     return node
+
+def predict(node, x):
+    if node.class_ is not None:
+        return node.class_
+    if x[node.feature] < node.threshold:
+        return predict(node.left, x)
+    else:
+        return predict(node.right, x)
+
+X = np.array([[2,3],[3,3],[3,4],[6,7],[7,8],[8,7]])
+y = np.array([0, 0, 0, 1, 1, 1])
+
+tree = build_tree(X, y)
+
+print("Predictions:")
+for i in range(len(X)):
+    pred = predict(tree, X[i])
+    print(f"  {X[i]} -> predicted: {pred} | actual: {y[i]} {'OK' if pred == y[i] else 'WRONG'}")
+
+print("\nNew points:")
+print(f"  (1, 2) -> class {predict(tree, np.array([1, 2]))}")
+print(f"  (7, 7) -> class {predict(tree, np.array([7, 7]))}")
