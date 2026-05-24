@@ -1,0 +1,101 @@
+import numpy as np
+import random
+
+class Node:
+    def __init__(self):
+        self.feature   = None
+        self.threshold = None
+        self.class_    = None
+        self.left      = None
+        self.right     = None
+
+def gini(labels):
+    n = len(labels)
+    if n == 0:
+        return 0
+    classes = np.unique(labels)
+    impurity = 1.0
+    for c in classes:
+        p = np.sum(labels == c) / n
+        impurity -= p * p
+    return impurity
+
+def best_split(X, y):
+    best_gini   = 1e9
+    best_feat   = None
+    best_thresh = None
+    features = random.sample(range(X.shape[1]), k=max(1, int(np.sqrt(X.shape[1]))))
+    for f in features:
+        for thresh in np.unique(X[:, f]):
+            left_mask  = X[:, f] < thresh
+            right_mask = ~left_mask
+
+            g = (np.sum(left_mask)/len(y))  * gini(y[left_mask]) \
+              + (np.sum(right_mask)/len(y)) * gini(y[right_mask])
+
+            if g < best_gini:
+                best_gini   = g
+                best_feat   = f
+                best_thresh = thresh
+
+    return best_feat, best_thresh
+
+def build_tree(X, y, depth=0, max_depth=3):
+    node = Node()
+
+    # leaf conditions
+    if depth >= max_depth or len(np.unique(y)) == 1:
+        node.class_ = int(np.bincount(y).argmax())
+        return node
+
+    # find best split
+    feat, thresh = best_split(X, y)
+
+    # split data
+    left_mask  = X[:, feat] < thresh
+    right_mask = ~left_mask
+
+    # set node values
+    node.feature   = feat
+    node.threshold = thresh
+
+    # recurse
+    node.left  = build_tree(X[left_mask],  y[left_mask],  depth+1, max_depth)
+    node.right = build_tree(X[right_mask], y[right_mask], depth+1, max_depth)
+
+    return node
+
+def predict(node, x):
+    if node.class_ is not None:
+        return node.class_
+    if x[node.feature] < node.threshold:
+        return predict(node.left, x)
+    else:
+        return predict(node.right, x)
+
+X = np.array([[2,3],[3,3],[3,4],[6,7],[7,8],[8,7]])
+y = np.array([0, 0, 0, 1, 1, 1])
+
+N_TREES = 10
+
+# build forest
+forest = []
+for _ in range(N_TREES):
+    # bootstrap sample
+    idx    = np.random.choice(len(X), len(X), replace=True)
+    X_boot = X[idx]
+    y_boot = y[idx]
+    forest.append(build_tree(X_boot, y_boot))
+
+# predict — majority vote
+print("Predictions:")
+for i in range(len(X)):
+    votes = [predict(tree, X[i]) for tree in forest]
+    pred  = int(np.bincount(votes).argmax())
+    print(f"  {X[i]} -> predicted: {pred} | actual: {y[i]} {'OK' if pred==y[i] else 'WRONG'}")
+
+print("\nNew points:")
+for point in [np.array([1,2]), np.array([7,7])]:
+    votes = [predict(tree, point) for tree in forest]
+    pred  = int(np.bincount(votes).argmax())
+    print(f"  {point} -> class {pred}")
