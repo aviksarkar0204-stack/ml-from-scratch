@@ -7,7 +7,8 @@ add_executable(Gaussian_Naive_Bayes Gaussian_Naive_Bayes/Gaussian_Naive_Bayes.c
         Multinomial_Naive_Bayes/Multinomail_Naive_Bayes.c
         Bernoulli_Naive_Bayes/Bernoulli_Naive_Bayes.cpp
         K-Mean/K-Mean.c
-        Decision_Tree/Decision_Tree.c)
+        Decision_Tree/Decision_Tree.c
+        Random_Forest/Random_Forest.c)
 target_link_libraries(Gaussian_Naive_Bayes m)
 
 
