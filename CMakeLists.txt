@@ -9,7 +9,9 @@ add_executable(Gaussian_Naive_Bayes Gaussian_Naive_Bayes/Gaussian_Naive_Bayes.c
         K-Mean/K-Mean.c
         Decision_Tree/Decision_Tree.c
         Random_Forest/Random_Forest.c
-        DBSCAN.c)
+        DBSCAN.c
+        Support_Vector_Machine/Support_Vector_Machine.cpp
+        Support_Vector_Machine/Support_Vector_Machine.cpp)
 target_link_libraries(Gaussian_Naive_Bayes m)
 
 
